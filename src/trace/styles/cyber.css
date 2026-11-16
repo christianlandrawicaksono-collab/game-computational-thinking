@@ -1,0 +1,214 @@
+/* TRACE: DIGITAL FORENSICS - Playful Cyber Detective Theme */
+
+:root {
+  --bg-primary: #0d1026;
+  --bg-surface: #15193b;
+  --bg-card: #1c214c;
+  --bg-card-hover: #23295c;
+  --color-cyan: #00d2ff;
+  --color-pink: #ff3388;
+  --color-lime: #10f089;
+  --color-amber: #ffb703;
+  --color-purple: #8b5cf6;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --font-game: 'Fredoka', cursive, sans-serif;
+  --font-ui: 'Plus Jakarta Sans', sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
+}
+
+.trace-forensics-root {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 20% 15%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0, 210, 255, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255, 51, 136, 0.08) 0%, transparent 50%),
+    radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px;
+}
+
+/* Playful Fonts */
+.font-game {
+  font-family: var(--font-game);
+}
+.font-code {
+  font-family: var(--font-code);
+}
+.font-ui {
+  font-family: var(--font-ui);
+}
+
+/* Chunky 3D Arcade Buttons */
+.btn-fun {
+  font-family: var(--font-game);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 10px 20px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.12s ease-in-out;
+  user-select: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-fun:active:not(:disabled) {
+  transform: translateY(3px);
+  border-bottom-width: 0px !important;
+  margin-top: 3px;
+}
+
+.btn-fun-cyan {
+  background: linear-gradient(135deg, #00d2ff, #0099ff);
+  color: #07152d;
+  border-bottom: 4px solid #0066cc;
+  box-shadow: 0 8px 20px rgba(0, 210, 255, 0.3);
+}
+.btn-fun-cyan:hover:not(:disabled) {
+  filter: brightness(1.1);
+  box-shadow: 0 10px 24px rgba(0, 210, 255, 0.45);
+}
+
+.btn-fun-pink {
+  background: linear-gradient(135deg, #ff3388, #e60067);
+  color: #ffffff;
+  border-bottom: 4px solid #990045;
+  box-shadow: 0 8px 20px rgba(255, 51, 136, 0.3);
+}
+.btn-fun-pink:hover:not(:disabled) {
+  filter: brightness(1.1);
+  box-shadow: 0 10px 24px rgba(255, 51, 136, 0.45);
+}
+
+.btn-fun-lime {
+  background: linear-gradient(135deg, #10f089, #05c269);
+  color: #052615;
+  border-bottom: 4px solid #038045;
+  box-shadow: 0 8px 20px rgba(16, 240, 137, 0.3);
+}
+.btn-fun-lime:hover:not(:disabled) {
+  filter: brightness(1.1);
+  box-shadow: 0 10px 24px rgba(16, 240, 137, 0.45);
+}
+
+.btn-fun-purple {
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
+  color: #ffffff;
+  border-bottom: 4px solid #581c87;
+  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.3);
+}
+.btn-fun-purple:hover:not(:disabled) {
+  filter: brightness(1.1);
+  box-shadow: 0 10px 24px rgba(168, 85, 247, 0.45);
+}
+
+.btn-fun-amber {
+  background: linear-gradient(135deg, #ffb703, #fb8500);
+  color: #2b1300;
+  border-bottom: 4px solid #b35900;
+  box-shadow: 0 8px 20px rgba(255, 183, 3, 0.3);
+}
+.btn-fun-amber:hover:not(:disabled) {
+  filter: brightness(1.1);
+  box-shadow: 0 10px 24px rgba(255, 183, 3, 0.45);
+}
+
+.btn-fun-dark {
+  background: #1e244d;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 4px solid #10142e;
+}
+.btn-fun-dark:hover:not(:disabled) {
+  background: #272f63;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-fun:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.8);
+  border-bottom-width: 0 !important;
+  transform: none !important;
+}
+
+/* Fun Detective Stamp */
+.stamp-anomaly {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #ff2a6d;
+  color: #ffffff;
+  font-family: var(--font-game);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  transform: rotate(-3deg);
+  box-shadow: 0 4px 12px rgba(255, 42, 109, 0.35);
+  animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stamp-innocent {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #10f089;
+  color: #032d18;
+  font-family: var(--font-game);
+  font-weight: 700;
+  font-size: 11px;
+  border-radius: 8px;
+  transform: rotate(2deg);
+  box-shadow: 0 4px 12px rgba(16, 240, 137, 0.35);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.6) rotate(-10deg); opacity: 0; }
+  100% { transform: scale(1) rotate(-3deg); opacity: 1; }
+}
+
+/* Wiggle animation on hover */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+.hover-wiggle:hover {
+  animation: wiggle 0.4s ease-in-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0d1026;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a3168;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00d2ff;
+}
+
+/* Card Glows */
+.game-card {
+  background: #15193b;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+.game-card:hover {
+  border-color: rgba(0, 210, 255, 0.35);
+  box-shadow: 0 12px 35px rgba(0, 210, 255, 0.12);
+}
