@@ -14,9 +14,9 @@ import { LevelSelect } from './components/LevelSelect';
 import { GameView } from './components/GameView';
 import { TutorialModal } from './components/TutorialModal';
 import { SettingsModal } from './components/SettingsModal';
-import { App as TraceApp } from './trace/App';
+import { CodeFactoryApp } from './games/code-factory/CodeFactoryApp';
 
-type ActiveGameMode = 'HUB' | 'LOGIC_QUEST' | 'TRACE';
+type ActiveGameMode = 'HUB' | 'LOGIC_QUEST' | 'CODE_FACTORY';
 type AppView = 'LANDING' | 'LEVEL_SELECT' | 'GAME';
 
 export function App() {
@@ -47,13 +47,13 @@ export function App() {
     setProgress(fresh);
   };
 
-  const handleSelectFromHub = (gameId: 'LOGIC_QUEST' | 'TRACE_FORENSICS') => {
+  const handleSelectFromHub = (gameId: 'LOGIC_QUEST' | 'CODE_FACTORY') => {
     if (gameId === 'LOGIC_QUEST') {
       setActiveGame('LOGIC_QUEST');
       setView('LANDING');
     } else {
       sound.stopBgm();
-      setActiveGame('TRACE');
+      setActiveGame('CODE_FACTORY');
     }
   };
 
@@ -106,14 +106,14 @@ export function App() {
   const currentLevel =
     LEVELS.find((l) => l.id === selectedLevelId) || LEVELS[0];
 
-  // Route 1: Game Hub (Choose between Logic Quest and Trace Forensics)
+  // Route 1: Game Hub (Choose between Logic Quest and Code Factory)
   if (activeGame === 'HUB') {
     return <GameHub onSelectGame={handleSelectFromHub} />;
   }
 
-  // Route 2: Trace Forensics (Game 2)
-  if (activeGame === 'TRACE') {
-    return <TraceApp onBackToHub={handleBackToHub} />;
+  // Route 2: Code Factory (Game 2)
+  if (activeGame === 'CODE_FACTORY') {
+    return <CodeFactoryApp onBackToHub={handleBackToHub} />;
   }
 
   // Route 3: Logic Quest (Game 1)

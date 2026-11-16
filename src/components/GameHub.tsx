@@ -1,28 +1,26 @@
 import React from 'react';
 import {
   Bot,
-  Search,
+  Factory,
   Cpu,
-  ShieldAlert,
   ArrowRight,
   Sparkles,
   Gamepad2,
   Users,
   Zap,
   Layers,
-  Terminal,
-  FileSearch,
-  Award,
+  Code2,
+  Repeat,
   CheckCircle2,
 } from 'lucide-react';
 import { sound } from '../utils/audio';
 
 interface GameHubProps {
-  onSelectGame: (gameId: 'LOGIC_QUEST' | 'TRACE_FORENSICS') => void;
+  onSelectGame: (gameId: 'LOGIC_QUEST' | 'CODE_FACTORY') => void;
 }
 
 export const GameHub: React.FC<GameHubProps> = ({ onSelectGame }) => {
-  const handleLaunchGame = (gameId: 'LOGIC_QUEST' | 'TRACE_FORENSICS') => {
+  const handleLaunchGame = (gameId: 'LOGIC_QUEST' | 'CODE_FACTORY') => {
     sound.playClick();
     onSelectGame(gameId);
   };
@@ -31,8 +29,8 @@ export const GameHub: React.FC<GameHubProps> = ({ onSelectGame }) => {
     <div className="relative min-h-screen flex flex-col justify-between items-center p-4 sm:p-8 select-none overflow-x-hidden w-full bg-[#080B14] text-slate-100 font-main">
       {/* Ambient Cyber Lighting Background */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-cyan/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-purple/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-pink-500/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-amber-500/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-orange-500/5 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Top Navigation Bar */}
       <header className="w-full max-w-6xl mx-auto flex items-center justify-between z-10 py-2 border-b border-slate-800/80 mb-6">
@@ -64,22 +62,22 @@ export const GameHub: React.FC<GameHubProps> = ({ onSelectGame }) => {
       {/* Main Content Area */}
       <main className="w-full max-w-6xl mx-auto z-10 flex flex-col items-center flex-1 justify-center py-4">
         {/* Header Hero Tag */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/40 text-xs font-mono text-cyan mb-4 shadow-lg">
-          <Sparkles size={14} className="text-yellow-400 animate-spin" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 text-xs font-mono text-cyan mb-4 shadow-lg">
+          <Sparkles size={14} className="text-amber-400 animate-spin" />
           <span className="font-semibold text-slate-200">
             PILIH PETUALANGAN BERPIKIR KOMPUTASIONAL
           </span>
-          <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
         </div>
 
         {/* Title */}
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white text-center mb-3 leading-tight">
-          DUAL LOGIC QUEST <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan via-blue-400 to-purple-400">&amp;</span> FORENSICS
+          LOGIC QUEST <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan via-amber-400 to-orange-500">&amp;</span> CODE FACTORY
         </h1>
 
         <p className="max-w-2xl text-xs sm:text-sm text-slate-300 text-center mb-8 leading-relaxed">
           Platform pembelajaran Computational Thinking untuk Siswa SMA dan Mahasiswa/i tanpa kuis pilihan ganda. 
-          Pilih salah satu game di bawah untuk memulai simulasi sistem atau investigasi data siber!
+          Pilih salah satu game di bawah untuk memulai simulasi sistem robotika atau otomasi lini industri pabrik!
         </p>
 
         {/* Team Credits Pill Bar */}
@@ -108,15 +106,15 @@ export const GameHub: React.FC<GameHubProps> = ({ onSelectGame }) => {
             </div>
 
             {/* Tim 2 */}
-            <div className="p-2.5 rounded-xl bg-slate-900/60 border border-purple/20 flex flex-col justify-center">
-              <div className="text-[10px] text-purple-300 font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                TIM PENGEMBANG GAME 02 (TRACE FORENSICS)
+            <div className="p-2.5 rounded-xl bg-slate-900/60 border border-amber-500/20 flex flex-col justify-center">
+              <div className="text-[10px] text-amber-300 font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                TIM PENGEMBANG GAME 02 (CODE FACTORY)
               </div>
               <div className="text-[11px] text-slate-200 font-mono space-y-0.5">
-                <div>• Tim Rekan Mahasiswa / TRACE Forensics Team</div>
-                <div className="text-slate-400 text-[10px]">Laboratorium Investigasi Data Siber &amp; Rekayasa Aturan Logika</div>
-                <div className="text-slate-400 text-[10px]">Sistem Investigasi Deteksi Anomali &amp; Debugging Pipeline</div>
+                <div>• Tim Rekan Mahasiswa / CODE FACTORY Team</div>
+                <div className="text-slate-400 text-[10px]">Laboratorium Otomasi Industri &amp; Rekayasa Logika Komputasi</div>
+                <div className="text-slate-400 text-[10px]">Sistem Simulasi Block Programming &amp; Evaluasi Par Metrik</div>
               </div>
             </div>
           </div>
@@ -195,7 +193,7 @@ export const GameHub: React.FC<GameHubProps> = ({ onSelectGame }) => {
             {/* Launch Button */}
             <button
               onClick={() => handleLaunchGame('LOGIC_QUEST')}
-              className="btn-cyber btn-cyan w-full py-3.5 px-6 font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-cyan/20 group-hover:scale-[1.02] transition-transform"
+              className="btn-cyber btn-cyan w-full py-3.5 px-6 font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-cyan/20 group-hover:scale-[1.02] transition-transform cursor-pointer"
             >
               <Zap size={16} className="fill-current" />
               <span>MAINKAN LOGIC QUEST</span>
@@ -204,35 +202,35 @@ export const GameHub: React.FC<GameHubProps> = ({ onSelectGame }) => {
           </div>
 
           {/* ========================================================= */}
-          {/* GAME CARD 2: TRACE FORENSICS */}
+          {/* GAME CARD 2: CODE FACTORY */}
           {/* ========================================================= */}
-          <div className="group relative rounded-3xl bg-slate-950/80 border-2 border-slate-800 hover:border-pink-500/70 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/15 hover:-translate-y-1 backdrop-blur-md overflow-hidden">
-            {/* Top Pink/Purple Accent Line */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-transparent" />
+          <div className="group relative rounded-3xl bg-slate-950/80 border-2 border-slate-800 hover:border-amber-500/70 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/15 hover:-translate-y-1 backdrop-blur-md overflow-hidden">
+            {/* Top Amber Accent Line */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-transparent" />
 
             <div>
               {/* Header Badge */}
               <div className="flex items-center justify-between mb-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/40 text-[11px] font-mono font-bold text-pink-400">
-                  <Search size={14} />
-                  <span>GAME 02 // CYBER FORENSICS</span>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-[11px] font-mono font-bold text-amber-400">
+                  <Factory size={14} />
+                  <span>GAME 02 // INDUSTRIAL SIMULATION</span>
                 </div>
                 <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
-                  <ShieldAlert size={13} className="text-pink-400" /> 3 Kasus
+                  <Layers size={13} className="text-amber-400" /> 3 Level (9 Pesanan)
                 </span>
               </div>
 
               {/* Game Title */}
-              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-wide mb-1 group-hover:text-pink-400 transition-colors">
-                TRACE
+              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-wide mb-1 group-hover:text-amber-400 transition-colors">
+                CODE FACTORY
               </h2>
-              <div className="text-xs sm:text-sm font-extrabold tracking-[0.2em] text-pink-400 uppercase font-mono mb-4">
-                DIGITAL FORENSICS
+              <div className="text-xs sm:text-sm font-extrabold tracking-[0.2em] text-amber-400 uppercase font-mono mb-4">
+                INDUSTRIAL AUTOMATION
               </div>
 
               {/* Description */}
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-5">
-                Bongkar sindikat kejahatan siber sebagai analis forensik <strong className="text-pink-400">TRACE LAB</strong>. Analisis data transaksi perbankan anomali, rakit aturan deteksi keamanan Aegis dengan mesin AST, dan perbaiki bug pipeline multi-modul.
+                Kendalikan lini perakitan pabrik manufaktur modern sebagai manajer operasional. Susun program instruksi permesinan blok untuk memproses, mewarnai, merakit, dan menyortir produk secara presisi dan efisien.
               </p>
 
               {/* Computational Thinking Pillars */}
@@ -241,42 +239,42 @@ export const GameHub: React.FC<GameHubProps> = ({ onSelectGame }) => {
                   Pilar Computational Thinking:
                 </div>
                 <div className="flex flex-wrap gap-1.5">
-                  <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-pink-300 font-mono flex items-center gap-1">
-                    <CheckCircle2 size={12} /> Dekomposisi Data &amp; Modul
+                  <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-amber-300 font-mono flex items-center gap-1">
+                    <CheckCircle2 size={12} /> Dekomposisi &amp; Sekuensial
                   </span>
-                  <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-pink-300 font-mono flex items-center gap-1">
-                    <CheckCircle2 size={12} /> Pengenalan Pola Anomali
+                  <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-amber-300 font-mono flex items-center gap-1">
+                    <CheckCircle2 size={12} /> Pengenalan Pola &amp; Loop
                   </span>
-                  <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-pink-300 font-mono flex items-center gap-1">
-                    <CheckCircle2 size={12} /> Abstraksi &amp; Confusion Matrix
+                  <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-amber-300 font-mono flex items-center gap-1">
+                    <CheckCircle2 size={12} /> Kondisi IF &amp; Sortir Jalur
                   </span>
-                  <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-pink-300 font-mono flex items-center gap-1">
-                    <CheckCircle2 size={12} /> Debugging Logika Sistem
+                  <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-amber-300 font-mono flex items-center gap-1">
+                    <CheckCircle2 size={12} /> Prosedur, Reusability &amp; Debug
                   </span>
                 </div>
               </div>
 
               {/* Feature Highlights */}
               <div className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800/80 mb-6 font-mono text-[11px] text-slate-300 space-y-1.5">
-                <div className="flex items-center gap-2 text-pink-400 font-semibold">
-                  <FileSearch size={13} />
+                <div className="flex items-center gap-2 text-amber-400 font-semibold">
+                  <Code2 size={13} />
                   <span>Fitur Unggulan:</span>
                 </div>
                 <div className="text-slate-400 pl-4 space-y-1">
-                  <div>• Eksplorasi 24 Transaksi dengan Komparasi Side-by-Side</div>
-                  <div>• Mesin Aturan AST Nyata (IF/ELSE, REPEAT, AND/OR)</div>
-                  <div>• Evaluasi Akurasi TP/FP/FN/TN &amp; Pipeline Debugger</div>
+                  <div>• Visual Conveyor Belt &amp; Ruang Perakitan Interaktif</div>
+                  <div>• Engine Simulasi Murni dengan 9 Skenario Pabrik Nyata</div>
+                  <div>• Evaluasi Par Metrik: Instruksi, Resource, Ticks, &amp; Debugging</div>
                 </div>
               </div>
             </div>
 
             {/* Launch Button */}
             <button
-              onClick={() => handleLaunchGame('TRACE_FORENSICS')}
-              className="btn-cyber bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white w-full py-3.5 px-6 font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-pink-500/20 group-hover:scale-[1.02] transition-transform"
+              onClick={() => handleLaunchGame('CODE_FACTORY')}
+              className="btn-cyber bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 w-full py-3.5 px-6 font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-amber-500/20 group-hover:scale-[1.02] transition-transform cursor-pointer"
             >
-              <Search size={16} />
-              <span>MAINKAN TRACE FORENSICS</span>
+              <Factory size={16} />
+              <span>MAINKAN CODE FACTORY</span>
               <ArrowRight size={16} />
             </button>
           </div>
@@ -296,4 +294,3 @@ export const GameHub: React.FC<GameHubProps> = ({ onSelectGame }) => {
     </div>
   );
 };
-
