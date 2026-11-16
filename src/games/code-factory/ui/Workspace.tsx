@@ -10,6 +10,7 @@ import type {
 } from '../engine/types';
 import { FactoryInterpreter } from '../engine/interpreter';
 import { MACHINES } from '../engine/machines';
+import { checkLevel33BugsFixed } from '../levels/level3';
 import {
   loadProgress,
   recordOrderCompletion,
@@ -135,6 +136,20 @@ export const Workspace: React.FC<WorkspaceProps> = ({
     };
   }, []);
 
+  // Reset state when order changes
+  useEffect(() => {
+    setPhase(order.levelNumber === 1 ? 'DECOMPOSITION' : 'BUILDING');
+    setIsDecompositionValid(order.levelNumber !== 1);
+    setProgram(order.initialProgram ? JSON.parse(JSON.stringify(order.initialProgram)) : []);
+    setHintsUsedCount(0);
+    setShowResultModal(false);
+    setEvaluationResult(null);
+    if (timerRef.current !== null) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  }, [order.id, order.levelNumber, order.initialProgram]);
+
   // Sync program changes to interpreter
   const handleProgramChange = (newProgram: ProgramBlock[]) => {
     setProgram(newProgram);
@@ -173,14 +188,16 @@ export const Workspace: React.FC<WorkspaceProps> = ({
       timerRef.current = null;
     }
 
-    const result = interpreter.evaluate();
+    const bugsFixed =
+      order.id === '3.3' ? checkLevel33BugsFixed(program).fixedCount : undefined;
+    const result = interpreter.evaluate(bugsFixed);
     setEvaluationResult(result);
     setShowResultModal(true);
 
     if (result.isSuccess && result.stars > 0) {
       recordOrderCompletion(order.id, result.stars, result.efficiencyScore, hintsUsedCount);
     }
-  }, [interpreter, order.id, hintsUsedCount]);
+  }, [interpreter, order.id, hintsUsedCount, program]);
 
   // Running loop
   const handleRun = () => {
@@ -189,7 +206,10 @@ export const Workspace: React.FC<WorkspaceProps> = ({
 
     if (speed === 999) {
       // Instant execution mode
+      const bugsFixed =
+        order.id === '3.3' ? checkLevel33BugsFixed(program).fixedCount : undefined;
       const result = interpreter.runToCompletion();
+      result.repairedBugsCount = bugsFixed;
       syncWithInterpreter();
       setEvaluationResult(result);
       setShowResultModal(true);
@@ -436,6 +456,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
         <ResultModal
           order={order}
           result={evaluationResult}
+          program={program}
           onRetry={() => {
             setShowResultModal(false);
             handleReset();

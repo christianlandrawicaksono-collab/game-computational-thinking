@@ -20,6 +20,7 @@ import {
 interface ResultModalProps {
   order: OrderData;
   result: OrderEvaluationResult;
+  program?: import('../engine/types').ProgramBlock[];
   onRetry: () => void;
   onNextOrder: () => void;
   onBackToLevelSelect: () => void;
@@ -29,6 +30,7 @@ interface ResultModalProps {
 export const ResultModal: React.FC<ResultModalProps> = ({
   order,
   result,
+  program,
   onRetry,
   onNextOrder,
   onBackToLevelSelect,
@@ -48,6 +50,9 @@ export const ResultModal: React.FC<ResultModalProps> = ({
   }, [isSuccess, result.stars]);
 
   // For order 3.3, check each bug specifically
+  const bugEval =
+    order.id === '3.3' && program ? checkLevel33BugsFixed(program) : null;
+
   const bugChecklist =
     order.id === '3.3' && order.initialProgram
       ? [
@@ -199,13 +204,15 @@ export const ResultModal: React.FC<ResultModalProps> = ({
                   <Bug className="w-4 h-4 text-indigo-400" /> Analisis Debugging (Bug Teratasi)
                 </h4>
                 <span className="text-[11px] font-mono font-bold bg-indigo-500/20 text-indigo-200 px-2 py-0.5 rounded border border-indigo-500/40">
-                  {result.repairedBugsCount ?? (isSuccess ? 5 : 0)} / 5 Selesai
+                  {bugEval?.fixedCount ?? result.repairedBugsCount ?? (isSuccess ? 5 : 0)} / 5 Selesai
                 </span>
               </div>
 
               <div className="space-y-1.5 text-xs">
                 {bugChecklist.map((bug) => {
-                  const isFixed = isSuccess;
+                  const isFixed = bugEval
+                    ? bugEval.bugDetails.find((b) => b.id === bug.id)?.fixed ?? isSuccess
+                    : isSuccess;
                   return (
                     <div
                       key={bug.id}

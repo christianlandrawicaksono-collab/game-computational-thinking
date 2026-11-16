@@ -44,6 +44,7 @@ export const CodeFactoryApp: React.FC<CodeFactoryAppProps> = ({ onBackToHub }) =
   if (currentScreen === 'WORKSPACE' && selectedOrder) {
     return (
       <Workspace
+        key={selectedOrder.id}
         order={selectedOrder}
         onBackToLevelSelect={() => setCurrentScreen('LEVEL_SELECT')}
         onSelectNextOrder={nextOrder ? handleSelectNextOrder : undefined}

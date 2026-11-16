@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { MachineType, OrderData } from '../engine/types';
 import { MACHINES } from '../engine/machines';
 import {
@@ -40,6 +40,13 @@ export const DecompositionView: React.FC<DecompositionViewProps> = ({
   const [selectedMachines, setSelectedMachines] = useState<MachineType[]>([]);
   const [status, setStatus] = useState<'IDLE' | 'CORRECT' | 'WRONG'>('IDLE');
   const [feedback, setFeedback] = useState<string>('');
+
+  // Reset state when order changes
+  useEffect(() => {
+    setSelectedMachines([]);
+    setStatus('IDLE');
+    setFeedback('');
+  }, [order.id]);
 
   const required = order.requiredDecompositionMachines || [];
 
