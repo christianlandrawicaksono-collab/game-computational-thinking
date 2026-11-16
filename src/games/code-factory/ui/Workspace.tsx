@@ -20,7 +20,7 @@ import { ConveyorBelt } from './ConveyorBelt';
 import { BlockBuilder } from './BlockBuilder';
 import { ControlsBar } from './ControlsBar';
 import { ExecutionLogger } from './ExecutionLogger';
-import { DecompositionPanel } from './DecompositionPanel';
+import { DecompositionView } from './DecompositionView';
 import { ResultModal } from './ResultModal';
 import { HintModal } from './HintModal';
 import { TutorialOverlay } from './TutorialOverlay';
@@ -74,6 +74,12 @@ export const Workspace: React.FC<WorkspaceProps> = ({
 
   // Speed (1x = 500ms, 2x = 250ms, 5x = 90ms, 999 = instant)
   const [speed, setSpeed] = useState<number>(2);
+
+  // Phase: 'DECOMPOSITION' (planning screen for Level 1) or 'BUILDING' (workspace screen)
+  type WorkspacePhase = 'DECOMPOSITION' | 'BUILDING';
+  const [phase, setPhase] = useState<WorkspacePhase>(() =>
+    order.levelNumber === 1 ? 'DECOMPOSITION' : 'BUILDING'
+  );
 
   // Level 1 Decomposition validation gate
   const [isDecompositionValid, setIsDecompositionValid] = useState<boolean>(() => {
@@ -257,6 +263,19 @@ export const Workspace: React.FC<WorkspaceProps> = ({
     }
   };
 
+  if (phase === 'DECOMPOSITION' && order.levelNumber === 1) {
+    return (
+      <DecompositionView
+        order={order}
+        onComplete={() => {
+          setIsDecompositionValid(true);
+          setPhase('BUILDING');
+        }}
+        onBackToLevelSelect={onBackToLevelSelect}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
       {/* Top Navigation Bar */}
@@ -288,22 +307,37 @@ export const Workspace: React.FC<WorkspaceProps> = ({
             </div>
           </div>
 
-          {/* Par Targets Summary */}
-          <div className="flex items-center gap-3 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-slate-800 text-xs font-mono">
-            <span className="text-[10px] text-slate-500 font-sans uppercase font-bold hidden sm:inline">
-              Target Par:
-            </span>
-            <div className="flex items-center gap-1 text-slate-300" title="Par Instruksi">
-              <Zap className="w-3.5 h-3.5 text-amber-400" />
-              <span>{order.parInstructions} inst</span>
-            </div>
-            <div className="flex items-center gap-1 text-slate-300" title="Par Resource">
-              <Layers className="w-3.5 h-3.5 text-cyan-400" />
-              <span>{order.parResources} res</span>
-            </div>
-            <div className="flex items-center gap-1 text-slate-300" title="Par Waktu">
-              <Clock className="w-3.5 h-3.5 text-emerald-400" />
-              <span>{order.parTimeTicks}t</span>
+          {/* Par Targets & Decomposition Badge */}
+          <div className="flex items-center gap-3">
+            {order.levelNumber === 1 && (
+              <button
+                type="button"
+                onClick={() => setPhase('DECOMPOSITION')}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 rounded-lg text-xs font-semibold transition-all active:scale-95 cursor-pointer shadow-sm"
+                title="Kembali ke layar briefing & dekomposisi mesin"
+              >
+                <Layers className="w-3.5 h-3.5 text-amber-400" />
+                <span>Dekomposisi</span>
+                <span className="text-[10px] text-amber-400 font-mono font-bold">[Ubah]</span>
+              </button>
+            )}
+
+            <div className="flex items-center gap-3 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-slate-800 text-xs font-mono">
+              <span className="text-[10px] text-slate-500 font-sans uppercase font-bold hidden sm:inline">
+                Target Par:
+              </span>
+              <div className="flex items-center gap-1 text-slate-300" title="Par Instruksi">
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <span>{order.parInstructions} inst</span>
+              </div>
+              <div className="flex items-center gap-1 text-slate-300" title="Par Resource">
+                <Layers className="w-3.5 h-3.5 text-cyan-400" />
+                <span>{order.parResources} res</span>
+              </div>
+              <div className="flex items-center gap-1 text-slate-300" title="Par Waktu">
+                <Clock className="w-3.5 h-3.5 text-emerald-400" />
+                <span>{order.parTimeTicks}t</span>
+              </div>
             </div>
           </div>
         </div>
@@ -350,15 +384,6 @@ export const Workspace: React.FC<WorkspaceProps> = ({
             )}
           </div>
         </section>
-
-        {/* Level 1 Decomposition Panel */}
-        {order.levelNumber === 1 && (
-          <DecompositionPanel
-            order={order}
-            isUnlocked={isDecompositionValid}
-            onValidationSuccess={() => setIsDecompositionValid(true)}
-          />
-        )}
 
         {/* Factory Floor (Conveyor Belt & Machines) */}
         <ConveyorBelt
