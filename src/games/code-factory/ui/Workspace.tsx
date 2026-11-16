@@ -76,16 +76,12 @@ export const Workspace: React.FC<WorkspaceProps> = ({
   // Speed (1x = 500ms, 2x = 250ms, 5x = 90ms, 999 = instant)
   const [speed, setSpeed] = useState<number>(2);
 
-  // Phase: 'DECOMPOSITION' (planning screen for Level 1) or 'BUILDING' (workspace screen)
+  // Phase: 'DECOMPOSITION' (planning screen for all orders) or 'BUILDING' (workspace screen)
   type WorkspacePhase = 'DECOMPOSITION' | 'BUILDING';
-  const [phase, setPhase] = useState<WorkspacePhase>(() =>
-    order.levelNumber === 1 ? 'DECOMPOSITION' : 'BUILDING'
-  );
+  const [phase, setPhase] = useState<WorkspacePhase>('DECOMPOSITION');
 
-  // Level 1 Decomposition validation gate
-  const [isDecompositionValid, setIsDecompositionValid] = useState<boolean>(() => {
-    return order.levelNumber !== 1;
-  });
+  // Decomposition validation gate
+  const [isDecompositionValid, setIsDecompositionValid] = useState<boolean>(false);
 
   // Modals
   const [showResultModal, setShowResultModal] = useState<boolean>(false);
@@ -138,8 +134,8 @@ export const Workspace: React.FC<WorkspaceProps> = ({
 
   // Reset state when order changes
   useEffect(() => {
-    setPhase(order.levelNumber === 1 ? 'DECOMPOSITION' : 'BUILDING');
-    setIsDecompositionValid(order.levelNumber !== 1);
+    setPhase('DECOMPOSITION');
+    setIsDecompositionValid(false);
     setProgram(order.initialProgram ? JSON.parse(JSON.stringify(order.initialProgram)) : []);
     setHintsUsedCount(0);
     setShowResultModal(false);
@@ -148,7 +144,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
-  }, [order.id, order.levelNumber, order.initialProgram]);
+  }, [order.id, order.initialProgram]);
 
   // Sync program changes to interpreter
   const handleProgramChange = (newProgram: ProgramBlock[]) => {
@@ -283,7 +279,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
     }
   };
 
-  if (phase === 'DECOMPOSITION' && order.levelNumber === 1) {
+  if (phase === 'DECOMPOSITION') {
     return (
       <DecompositionView
         order={order}
@@ -329,18 +325,16 @@ export const Workspace: React.FC<WorkspaceProps> = ({
 
           {/* Par Targets & Decomposition Badge */}
           <div className="flex items-center gap-3">
-            {order.levelNumber === 1 && (
-              <button
-                type="button"
-                onClick={() => setPhase('DECOMPOSITION')}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 rounded-lg text-xs font-semibold transition-all active:scale-95 cursor-pointer shadow-sm"
-                title="Kembali ke layar briefing & dekomposisi mesin"
-              >
-                <Layers className="w-3.5 h-3.5 text-amber-400" />
-                <span>Dekomposisi</span>
-                <span className="text-[10px] text-amber-400 font-mono font-bold">[Ubah]</span>
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => setPhase('DECOMPOSITION')}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 rounded-lg text-xs font-semibold transition-all active:scale-95 cursor-pointer shadow-sm"
+              title="Kembali ke layar briefing & dekomposisi mesin"
+            >
+              <Layers className="w-3.5 h-3.5 text-amber-400" />
+              <span>Dekomposisi</span>
+              <span className="text-[10px] text-amber-400 font-mono font-bold">[Ubah]</span>
+            </button>
 
             <div className="flex items-center gap-3 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-slate-800 text-xs font-mono">
               <span className="text-[10px] text-slate-500 font-sans uppercase font-bold hidden sm:inline">

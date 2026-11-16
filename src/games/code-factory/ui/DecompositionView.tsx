@@ -123,47 +123,108 @@ export const DecompositionView: React.FC<DecompositionViewProps> = ({
               Spesifikasi Produk yang Diminta Pelanggan
             </span>
             <span className="text-[11px] font-mono text-slate-400">
-              Bahan Awal: 1x {order.initialItems[0]?.material} (polos)
+              Bahan Awal: {order.initialItems.length} unit di antrean Input Belt
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-            {order.targetSpecs.map((spec, idx) => (
-              <div
-                key={idx}
-                className="bg-slate-950/90 border border-cyan-500/30 rounded-xl p-3 flex flex-col justify-between"
-              >
-                <div className="text-[10px] text-slate-400 font-mono uppercase mb-1">
-                  Target Produk #{idx + 1}
+          {order.targetLanes ? (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div className="bg-slate-950/90 border border-purple-500/30 rounded-xl p-3 flex flex-col justify-between">
+                <div className="text-[10px] text-purple-400 font-mono uppercase mb-1 font-bold">
+                  Target Jalur A (Sortir)
                 </div>
-                <div className="text-base font-extrabold text-amber-200 capitalize mb-2">
-                  {spec.material}
+                <div className="text-base font-extrabold text-white capitalize">
+                  {order.targetLanes.A?.color} {order.targetLanes.A?.material}
                 </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {spec.cut && (
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {order.targetLanes.A?.cut && (
                     <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
                       Terpotong (Cut)
                     </span>
                   )}
-                  {spec.color && (
-                    <span className="bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
-                      Warna {spec.color}
-                    </span>
-                  )}
-                  {spec.assembled && (
-                    <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
-                      Dirakit Komponen
-                    </span>
-                  )}
-                  {spec.packed && (
-                    <span className="bg-blue-500/20 text-blue-300 border border-blue-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
-                      Dikemas Rapi
-                    </span>
-                  )}
+                  <span className="bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
+                    Jalur A
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
+
+              <div className="bg-slate-950/90 border border-purple-500/30 rounded-xl p-3 flex flex-col justify-between">
+                <div className="text-[10px] text-purple-400 font-mono uppercase mb-1 font-bold">
+                  Target Jalur B (Sortir)
+                </div>
+                <div className="text-base font-extrabold text-white capitalize">
+                  {order.targetLanes.B?.color} {order.targetLanes.B?.material}
+                </div>
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {order.targetLanes.B?.cut && (
+                    <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
+                      Terpotong (Cut)
+                    </span>
+                  )}
+                  {order.targetLanes.B?.assembled && (
+                    <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
+                      Dirakit (+Asm)
+                    </span>
+                  )}
+                  <span className="bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
+                    Jalur B
+                  </span>
+                </div>
+              </div>
+
+              <div className="bg-slate-950/90 border border-purple-500/30 rounded-xl p-3 flex flex-col justify-between">
+                <div className="text-[10px] text-purple-400 font-mono uppercase mb-1 font-bold">
+                  Target Jalur C (Sortir)
+                </div>
+                <div className="text-base font-extrabold text-white capitalize">
+                  {order.targetLanes.C?.color || 'Sisa / Mentah'} {order.targetLanes.C?.material || ''}
+                </div>
+                <div className="flex flex-wrap gap-1 mt-2">
+                  <span className="bg-slate-800 text-slate-300 border border-slate-700 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
+                    Jalur C (Inspeksi)
+                  </span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs max-h-56 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-slate-800">
+              {order.targetSpecs.map((spec, idx) => (
+                <div
+                  key={idx}
+                  className="bg-slate-950/90 border border-cyan-500/30 rounded-xl p-3 flex flex-col justify-between"
+                >
+                  <div className="text-[10px] text-slate-400 font-mono uppercase mb-1">
+                    Target Produk #{idx + 1}
+                  </div>
+                  <div className="text-base font-extrabold text-amber-200 capitalize mb-2">
+                    {spec.material}
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {spec.cut && (
+                      <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
+                        Terpotong (Cut)
+                      </span>
+                    )}
+                    {spec.color && (
+                      <span className="bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
+                        Warna {spec.color}
+                      </span>
+                    )}
+                    {spec.assembled && (
+                      <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
+                        Dirakit Komponen
+                      </span>
+                    )}
+                    {spec.packed && (
+                      <span className="bg-blue-500/20 text-blue-300 border border-blue-500/40 text-[10px] px-2 py-0.5 rounded font-mono font-bold">
+                        Dikemas Rapi
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Machine Decomposition Selection */}
