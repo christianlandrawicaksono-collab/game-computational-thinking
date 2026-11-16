@@ -81,40 +81,47 @@ export const GameHub: React.FC<GameHubProps> = ({ onSelectGame }) => {
         </p>
 
         {/* Team Credits Pill Bar */}
-        <div className="w-full max-w-4xl mx-auto mb-8 bg-slate-950/70 border border-slate-800 rounded-2xl p-3 backdrop-blur-md">
-          <div className="flex items-center justify-between flex-wrap gap-2 text-xs font-mono text-slate-400 px-2 pb-2 border-b border-slate-800/80 mb-2.5">
-            <span className="flex items-center gap-1.5 text-cyan font-bold">
-              <Users size={14} /> IDENTITAS PENGEMBANG GAME WEB
+        <div className="w-full max-w-4xl mx-auto mb-8 bg-slate-950/70 border border-slate-800 rounded-2xl p-4 backdrop-blur-md">
+          <div className="flex items-center justify-between flex-wrap gap-2 text-xs font-mono text-slate-400 pb-3 border-b border-slate-800/80 mb-3">
+            <span className="flex items-center gap-2 text-cyan font-bold text-xs uppercase tracking-wider">
+              <Users size={16} /> IDENTITAS PENGEMBANG GAME WEB
             </span>
-            <span className="text-[11px] text-slate-400">
-              Mata Pelajaran / Mata Kuliah: Informatika &amp; Logika Komputasi
+            <span className="text-[11px] text-amber-300 font-mono font-semibold bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full">
+              Mata Kuliah: Pengembangan Game
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {/* Tim 1 */}
-            <div className="p-2.5 rounded-xl bg-slate-900/60 border border-cyan/20 flex flex-col justify-center">
-              <div className="text-[10px] text-cyan font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan" />
-                TIM PENGEMBANG GAME 01 (LOGIC QUEST)
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {/* Anggota 1 */}
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan/40 transition-colors flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-cyan/10 border border-cyan/30 text-cyan flex items-center justify-center font-bold text-xs font-mono shrink-0">
+                01
               </div>
-              <div className="text-[11px] text-slate-200 font-mono space-y-0.5">
-                <div>• Christian Landra Wicaksono <span className="text-cyan font-semibold">(24.N2.0003)</span></div>
-                <div>• Anachasi Nathaniel Budi Widoyo <span className="text-purple-300 font-semibold">(24.N2.0002)</span></div>
-                <div>• Gabriel Kresnoputero Wisnu Bagasworo <span className="text-emerald-400 font-semibold">(24.N2.0008)</span></div>
+              <div className="min-w-0">
+                <div className="text-xs font-bold text-slate-100 truncate">Christian Landra Wicaksono</div>
+                <div className="text-[11px] font-mono text-cyan font-semibold">24.N2.0003</div>
               </div>
             </div>
 
-            {/* Tim 2 */}
-            <div className="p-2.5 rounded-xl bg-slate-900/60 border border-amber-500/20 flex flex-col justify-center">
-              <div className="text-[10px] text-amber-300 font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                TIM PENGEMBANG GAME 02 (CODE FACTORY)
+            {/* Anggota 2 */}
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/40 transition-colors flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-300 flex items-center justify-center font-bold text-xs font-mono shrink-0">
+                02
               </div>
-              <div className="text-[11px] text-slate-200 font-mono space-y-0.5">
-                <div>• Tim Rekan Mahasiswa / CODE FACTORY Team</div>
-                <div className="text-slate-400 text-[10px]">Laboratorium Otomasi Industri &amp; Rekayasa Logika Komputasi</div>
-                <div className="text-slate-400 text-[10px]">Sistem Simulasi Block Programming &amp; Evaluasi Par Metrik</div>
+              <div className="min-w-0">
+                <div className="text-xs font-bold text-slate-100 truncate">Anachasi Nathaniel Budi Widoyo</div>
+                <div className="text-[11px] font-mono text-purple-300 font-semibold">24.N2.0002</div>
+              </div>
+            </div>
+
+            {/* Anggota 3 */}
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/40 transition-colors flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-bold text-xs font-mono shrink-0">
+                03
+              </div>
+              <div className="min-w-0">
+                <div className="text-xs font-bold text-slate-100 truncate">Gabriel Kresnoputero Wisnu Bagasworo</div>
+                <div className="text-[11px] font-mono text-emerald-400 font-semibold">24.N2.0008</div>
               </div>
             </div>
           </div>
